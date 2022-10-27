@@ -6,6 +6,22 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "TrickyUtilsLibrary.generated.h"
 
+class UTimelineComponent;
+
+/**
+ * 
+ */
+UENUM(BlueprintType)
+enum class ETimeFormat : uint8
+{
+	MM_SS_MsMs UMETA(DisplayName="MM:SS.MsMs"),
+	MM_SS_Ms UMETA(DisplayName="MM:SS.Ms"),
+	MM_SS UMETA(DisplayName="MM:SS"),
+	SS_MsMs UMETA(DisplayName="SS.MsMs"),
+	SS_Ms UMETA(DisplayName="SS.Ms"),
+	SS UMETA(DisplayName="SS")
+};
+
 /**
  * 
  */
@@ -14,4 +30,17 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 {
 	GENERATED_BODY()
 	
+	/**
+	 * Converts given time in seconds in different time formats.
+	 */
+	UFUNCTION(BlueprintPure, Category="TrickyFunctionLibrary")
+	static FString ConvertTimeSeconds(const float TimeSeconds, const ETimeFormat TimeFormat);
+
+	/**
+	 * Sets timeline play rate to play as long as TargetTime.
+	 */
+	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
+	static void SetTimelineRateToTime(UTimelineComponent* TimelineComponent,
+	                                      const float TimelineLength = 1.f,
+	                                      const float TargetTime = 1.f);
 };
