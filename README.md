@@ -30,4 +30,4 @@ In this case the plugin can be used for any blueprint project.
 3. `GetPlayerCharacterViewPoint` - returns player characters viewpoint location and rotation;
 4. `ApproachInt32` - changes the given int32 variable  by a given delta value up to a target value.
 5. `ApproachFloat` - changes the given float variable  by a given delta value up to a target value.
-4. `ApproachInt32` - changes the given vector variable  by a given delta value up to a target value.
+6. `ApproachInt32` - changes the given vector variable  by a given delta value up to a target value.
