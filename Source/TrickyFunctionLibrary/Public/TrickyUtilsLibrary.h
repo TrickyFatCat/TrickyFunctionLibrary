@@ -46,8 +46,37 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	                                      const float TargetTime = 1.f);
 
 	/**
-	 *
+	 * Returns camera location and rotation.
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static bool GetPlayerCharacterViewPoint(AActor* CharacterActor, FVector& ViewLocation, FRotator& ViewRotation);
+	
+	template <typename T>
+	static void Approach(T& CurrentValue, const T TargetValue, const T DeltaValue)
+	{
+		CurrentValue = TargetValue > CurrentValue
+			               ? FMath::Min(CurrentValue + DeltaValue, TargetValue)
+			               : FMath::Max(CurrentValue - DeltaValue, TargetValue);
+	}
+	
+	/**
+	 * Changes the given variable by a given delta value up to a target value.
+	 * If CurrentValue > TargetValue, it will be decreased, else increased.
+	 */
+	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
+	static void ApproachInt32(UPARAM(ref) int32& CurrentValue, const int32 TargetValue, const int32 DeltaValue);
+
+	/**
+	 * Changes the given variable by a given delta value up to a target value.
+	 * If CurrentValue > TargetValue, it will be decreased, else increased.
+	 */
+	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
+	static void ApproachFloat(UPARAM(ref) float& CurrentValue, const float TargetValue, const float DeltaValue);
+
+	/**
+	 * Changes the given variable by a given delta value up to a target value.
+	 * If CurrentValue > TargetValue, it will be decreased, else increased.
+	 */
+	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
+	static void ApproachVector(UPARAM(ref) FVector& CurrentValue, const FVector TargetValue, const FVector DeltaValue);
 };

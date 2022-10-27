@@ -93,3 +93,20 @@ bool UTrickyUtilsLibrary::GetPlayerCharacterViewPoint(AActor* CharacterActor, FV
 
 	return true;
 }
+
+void UTrickyUtilsLibrary::ApproachInt32(int32& CurrentValue, const int32 TargetValue, const int32 DeltaValue)
+{
+	Approach(CurrentValue, TargetValue, DeltaValue);
+}
+
+void UTrickyUtilsLibrary::ApproachFloat(float& CurrentValue, const float TargetValue, const float DeltaValue)
+{
+	Approach(CurrentValue, TargetValue, DeltaValue);
+}
+
+void UTrickyUtilsLibrary::ApproachVector(FVector& CurrentValue, const FVector TargetValue, const FVector DeltaValue)
+{
+	Approach(CurrentValue.X, TargetValue.X, DeltaValue.X);
+	Approach(CurrentValue.Y, TargetValue.Y, DeltaValue.Y);
+	Approach(CurrentValue.Z, TargetValue.Z, DeltaValue.Z);
+}
