@@ -7,6 +7,7 @@
 #include "TrickyUtilsLibrary.generated.h"
 
 class UTimelineComponent;
+class AActor;
 
 /**
  * 
@@ -43,4 +44,10 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	static void SetTimelineRateToTime(UTimelineComponent* TimelineComponent,
 	                                      const float TimelineLength = 1.f,
 	                                      const float TargetTime = 1.f);
+
+	/**
+	 *
+	 */
+	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
+	static bool GetPlayerCharacterViewPoint(AActor* CharacterActor, FVector& ViewLocation, FRotator& ViewRotation);
 };

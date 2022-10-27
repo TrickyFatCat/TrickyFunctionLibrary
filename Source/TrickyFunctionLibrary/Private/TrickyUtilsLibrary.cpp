@@ -4,6 +4,8 @@
 #include "TrickyUtilsLibrary.h"
 
 #include "Components/TimelineComponent.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/PlayerController.h"
 #include "Kismet/KismetMathLibrary.h"
 
 FString UTrickyUtilsLibrary::ConvertTimeSeconds(const float TimeSeconds, const ETimeFormat TimeFormat)
@@ -66,4 +68,28 @@ void UTrickyUtilsLibrary::SetTimelineRateToTime(UTimelineComponent* TimelineComp
 	if (!TimelineComponent || TargetTime <= 0.f || TimelineLength <= 0.f) return;
 
 	TimelineComponent->SetPlayRate(TimelineLength / TargetTime);
+}
+
+bool UTrickyUtilsLibrary::GetPlayerCharacterViewPoint(AActor* CharacterActor, FVector& ViewLocation, FRotator& ViewRotation)
+{
+	const ACharacter* Character = Cast<ACharacter>(CharacterActor);
+
+	if (!Character)
+	{
+		return false;
+	}
+
+	if (Character->IsPlayerControlled())
+	{
+		const APlayerController* Controller = Character->GetController<APlayerController>();
+
+		if (!Controller)
+		{
+			return false;
+		}
+		
+		Controller->GetPlayerViewPoint(ViewLocation, ViewRotation);
+	}
+
+	return true;
 }
