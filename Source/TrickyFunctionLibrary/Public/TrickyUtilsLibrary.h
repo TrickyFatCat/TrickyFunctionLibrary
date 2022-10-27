@@ -32,7 +32,7 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	GENERATED_BODY()
 	
 	/**
-	 * Converts given time in seconds in different time formats.
+	 * Converts given time in seconds to different time formats.
 	 */
 	UFUNCTION(BlueprintPure, Category="TrickyFunctionLibrary")
 	static FString ConvertTimeSeconds(const float TimeSeconds, const ETimeFormat TimeFormat);
@@ -46,7 +46,7 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	                                      const float TargetTime = 1.f);
 
 	/**
-	 * Returns camera location and rotation.
+	 * Returns player characters viewport location and rotation. 
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static bool GetPlayerCharacterViewPoint(AActor* CharacterActor, FVector& ViewLocation, FRotator& ViewRotation);
@@ -60,21 +60,21 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	}
 	
 	/**
-	 * Changes the given variable by a given delta value up to a target value.
+	 * Changes the given int32 variable by a given delta value up to a target value.
 	 * If CurrentValue > TargetValue, it will be decreased, else increased.
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static void ApproachInt32(UPARAM(ref) int32& CurrentValue, const int32 TargetValue, const int32 DeltaValue);
 
 	/**
-	 * Changes the given variable by a given delta value up to a target value.
+	 * Changes the given float variable by a given delta value up to a target value.
 	 * If CurrentValue > TargetValue, it will be decreased, else increased.
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static void ApproachFloat(UPARAM(ref) float& CurrentValue, const float TargetValue, const float DeltaValue);
 
 	/**
-	 * Changes the given variable by a given delta value up to a target value.
+	 * Changes the given vector variable by a given delta value up to a target value.
 	 * If CurrentValue > TargetValue, it will be decreased, else increased.
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
