@@ -30,7 +30,7 @@ UCLASS()
 class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
 	/**
 	 * Converts given time in seconds to different time formats.
 	 */
@@ -42,15 +42,15 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static void SetTimelineRateToTime(UTimelineComponent* TimelineComponent,
-	                                      const float TimelineLength = 1.f,
-	                                      const float TargetTime = 1.f);
+	                                  const float TimelineLength = 1.f,
+	                                  const float TargetTime = 1.f);
 
 	/**
 	 * Returns player characters viewport location and rotation. 
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static bool GetPlayerCharacterViewPoint(AActor* CharacterActor, FVector& ViewLocation, FRotator& ViewRotation);
-	
+
 	template <typename T>
 	static void Approach(T& CurrentValue, const T TargetValue, const T DeltaValue)
 	{
@@ -58,7 +58,7 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 			               ? FMath::Min(CurrentValue + DeltaValue, TargetValue)
 			               : FMath::Max(CurrentValue - DeltaValue, TargetValue);
 	}
-	
+
 	/**
 	 * Changes the given int32 variable by a given delta value up to a target value.
 	 * If CurrentValue > TargetValue, it will be decreased, else increased.
@@ -79,4 +79,38 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	 */
 	UFUNCTION(BlueprintCallable, Category="TrickyFunctionLibrary")
 	static void ApproachVector(UPARAM(ref) FVector& CurrentValue, const FVector TargetValue, const FVector DeltaValue);
+
+	/**
+	 * Oscillates float using given amplitude and frequency.
+	 * Call it in tick.
+	 */
+	UFUNCTION(BlueprintPure, Category="TrickyFunctionLibrary", meta=(WorldContext="WorldContextObj"))
+	static float OscillateFloat(UObject* WorldContextObj,
+	                            const float InitialValue,
+	                            const float Amplitude,
+	                            const float Frequency);
+
+	/**
+	 * Oscillates vector using given amplitude and frequency.
+	 * Call it in tick.
+	 */
+	UFUNCTION(BlueprintPure, Category="TrickyFunctionLibrary",
+		meta=(WorldContext="WorldContextObj", AutoCreateRefTerm="InitialValue"))
+	static void OscillateVector(UObject* WorldContextObj,
+	                            const FVector& InitialValue,
+	                            FVector& Result, 
+	                            const FVector Amplitude,
+	                            const FVector Frequency);
+
+	/**
+	 * Oscillates rotator using given amplitude and frequency.
+	 * Call it in tick.
+	 */
+	UFUNCTION(BlueprintPure, Category="TrickyFunctionLibrary",
+		meta=(WorldContext="WorldContextObj", AutoCreateRefTerm="InitialValue"))
+	static void OscillateRotator(UObject* WorldContextObj,
+	                             const FRotator& InitialValue,
+	                             FRotator& Result,
+	                             const FVector Amplitude,
+	                             const FVector Frequency);
 };
