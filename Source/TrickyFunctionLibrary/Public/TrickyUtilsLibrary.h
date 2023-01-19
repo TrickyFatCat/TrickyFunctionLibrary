@@ -113,4 +113,12 @@ class TRICKYFUNCTIONLIBRARY_API UTrickyUtilsLibrary : public UBlueprintFunctionL
 	                             FRotator& Result,
 	                             const FVector Amplitude,
 	                             const FVector Frequency);
+
+	template<typename T>
+	static void SwapValues(T& A, T& B)
+	{
+		const T C = A;
+		A = B;
+		B = C;
+	}
 };
